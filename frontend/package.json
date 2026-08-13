@@ -1,0 +1,23 @@
+{
+  "name": "ui",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "packageManager": "pnpm@11.20.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@awesome.me/webawesome": "^3.11.0",
+    "@lit-labs/router": "^0.1.4",
+    "@tailwindcss/vite": "^4.3.3",
+    "lit": "^3.3.3",
+    "tailwindcss": "^4.3.3"
+  },
+  "devDependencies": {
+    "typescript": "~6.0.2",
+    "vite": "^8.2.0"
+  }
+}
