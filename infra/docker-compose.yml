@@ -1,0 +1,30 @@
+services:
+  backend:
+    build:
+      context: ..
+      dockerfile: infra/Dockerfile
+      no_cache: true
+    env_file:
+      - .env
+    ports:
+      - "8080:8080"
+    environment:
+      DATABASE_URL: jdbc:postgresql://postgres-db:5432/simplyc
+      DATABASE_USERNAME: user
+      DATABASE_PASSWORD: password
+      REDIS_URL: redis-db
+      REDIS_PORT: 6379
+    networks:
+      - postgres-network
+      - redis-network
+
+networks:
+  default:
+    name: chat-app-net
+    external: true
+  postgres-network:
+    name: postgres-network
+    external: true
+  redis-network:
+    name: redis-network
+    external: true

@@ -20,7 +20,7 @@ application:
   otp:
     ttl: ${OTP_TTL:PT20M}
     email:
-      api-key: ${EMAIL_API_KEY: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}
+      api-key: ${EMAIL_API_KEY}
       api-url: ${EMAIL_API_URL:https://api.brevo.com/v3/smtp/email}
       from:
         email: ${EMAIL_FROM_ADDRESS:simplyc.bot@gmail.com}
