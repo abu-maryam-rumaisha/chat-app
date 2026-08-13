@@ -10,10 +10,10 @@ A chat application with a Spring Boot API backend and a Lit-based frontend, buil
 
 ## Build integration
 
-The frontend is not served separately — it is compiled and folded into the Spring Boot jar:
+The frontend is not served separately — it is folded into the Spring Boot jar:
 
-1. `backend/pom.xml` uses the `frontend-maven-plugin` during the `generate-sources` phase to install a local Node/pnpm toolchain and run `pnpm install` + `pnpm run build` against the sibling `frontend/` project.
-2. `maven-resources-plugin` then copies the Vite `dist/` output into `backend/src/main/resources/static`, which Spring Boot serves as static resources.
+1. Build the frontend yourself first: `pnpm install --frozen-lockfile` + `pnpm run build` in `frontend/` (see `frontend/CLAUDE.md`). Maven no longer drives this step.
+2. `backend/pom.xml`'s `maven-resources-plugin` then copies the Vite `dist/` output into `backend/src/main/resources/static` during the `generate-sources` phase, which Spring Boot serves as static resources.
 3. `backend/src/main/resources/static` is generated output (gitignored) — it's a build artifact, not hand-edited source.
 
 ## Stack
@@ -26,20 +26,24 @@ The frontend is not served separately — it is compiled and folded into the Spr
 
 - JDK (see `backend/pom.xml` for the required Java version)
 - Maven
+- Node/pnpm (see `frontend/CLAUDE.md`) — required to build the frontend, Maven no longer installs these
 - PostgreSQL, Redis, and RabbitMQ instances reachable via the environment variables below
-- Node/pnpm are installed automatically by the Maven build — a manual install is only needed for standalone frontend development (see `frontend/CLAUDE.md`)
 
 ## Running locally
 
-Run the database migrations, then build and start the app from `backend/`:
+Build the frontend, run the database migrations, then build and start the app from `backend/`:
 
 ```bash
-cd backend
+cd frontend
+pnpm install --frozen-lockfile
+pnpm run build
+
+cd ../backend
 ./mvnw flyway:migrate
 ./mvnw spring-boot:run
 ```
 
-This builds the frontend and starts the API (serving the UI) on the configured port.
+This starts the API (serving the UI built above) on the configured port.
 
 ### Configuration
 
