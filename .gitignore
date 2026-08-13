@@ -2,7 +2,7 @@ HELP.md
 target/
 backend/src/main/resources/static/
 backend/barcode/
-!.mvn/wrapper/maven-wrapper.jar
+!backend/.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 
@@ -35,6 +35,7 @@ build/
 .vscode/
 .node_module
 
+.env
 # Logs
 logs
 *.log
