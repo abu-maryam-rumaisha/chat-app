@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public enum RedisPrefix {
-    token("session:token:"),refreshToken("session:refreshToken:"),otp("otp:"),passwordReset("password-reset:");
+    token("session:token:"),refreshToken("session:refreshToken:"),otp("otp:"),passwordReset("password-reset:"),presence("presence:count:");
     private String prefix;
 
     public String serialize(String token){

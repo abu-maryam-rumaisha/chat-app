@@ -104,4 +104,30 @@ export interface Translations {
     resendButton: string;
     verify: string;
   };
+  chatList: {
+    title: string;
+    searchPlaceholder: string;
+    searchEmptyTitle: string;
+    searchEmptySubtitle: string;
+    typing: string;
+    newChat: string;
+    newChatSearchPlaceholder: string;
+    suggested: string;
+    newChatEmptyTitle: string;
+    newChatEmptySubtitle: string;
+    newChatStartError: string;
+    detailEmptyTitle: string;
+    detailEmptySubtitle: string;
+    emptyThreadHint: string;
+    online: string;
+    offline: string;
+    messagePlaceholder: string;
+    attach: string;
+    send: string;
+    accountMenu: string;
+    logout: string;
+    logoutError: string;
+    dateToday: string;
+    dateYesterday: string;
+  };
 }

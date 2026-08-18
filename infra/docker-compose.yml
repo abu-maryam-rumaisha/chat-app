@@ -4,6 +4,7 @@ services:
       context: ..
       dockerfile: infra/Dockerfile
       no_cache: true
+    restart: unless-stopped
     env_file:
       - .env
     ports:

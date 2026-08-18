@@ -12,4 +12,6 @@ public interface UserService {
 
     Response<UserControllerDto.EmailAvailabilityResponse> checkEmailAvailability(UserControllerDto.EmailAvailabilityRequest requestPayload);
 
+    Response<UserControllerDto.GetContactsResponse> getContacts(String search, int page, int size);
+
 }

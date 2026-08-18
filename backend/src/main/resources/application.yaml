@@ -15,6 +15,7 @@ spring:
       port: ${REDIS_PORT:6379}
 application:
   session:
+    same-site: ${SESSION_SAME_SITE:None}
     token-ttl: ${SESSION_TOKEN_TTL:PT3H}
     refresh-token-ttl: ${SESSION_REFRESH_TOKEN_TTL:PT24H}
   otp:
@@ -28,3 +29,8 @@ application:
     token-ttl: ${PASSWORD_RESET_TOKEN_TTL:PT10M}
   upload:
     icons-dir: ${UPLOAD_ICONS_DIR:./upload/icons}
+  websocket:
+    relay-host: ${RABBITMQ_STOMP_HOST:localhost}
+    relay-port: ${RABBITMQ_STOMP_PORT:61613}
+    login: ${RABBITMQ_USERNAME:user}
+    passcode: ${RABBITMQ_PASSWORD:password}

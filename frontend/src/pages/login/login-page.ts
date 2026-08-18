@@ -181,19 +181,7 @@ export class LoginPage extends LitElement {
     const t = this.localize.t;
     return html`
       <span class="flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-100">
-        <svg
-          class="h-6 w-6 text-indigo-600"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <circle cx="12" cy="8" r="4" />
-          <path d="M4 21c0-4.418 3.582-8 8-8s8 3.582 8 8" />
-        </svg>
+        <span class="icon-mask h-6 w-6 text-indigo-600 [--icon-url:url(/icons/user-circle.svg)]" aria-hidden="true"></span>
       </span>
 
       <p class="mt-4 text-xs font-semibold tracking-widest text-slate-400 uppercase">${t.login.eyebrow}</p>
@@ -264,19 +252,7 @@ export class LoginPage extends LitElement {
 
     return html`
       <span class="flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-100">
-        <svg
-          class="h-6 w-6 text-amber-600"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <circle cx="12" cy="12" r="9" />
-          <path d="M12 7v5l3 3" />
-        </svg>
+        <span class="icon-mask h-6 w-6 text-amber-600 [--icon-url:url(/icons/clock.svg)]" aria-hidden="true"></span>
       </span>
 
       <p class="mt-4 text-xs font-semibold tracking-widest text-slate-400 uppercase">${t.login.pendingStepLabel}</p>
@@ -350,25 +326,15 @@ export class LoginPage extends LitElement {
       <main
         class="relative flex min-h-svh items-center justify-center overflow-hidden bg-gradient-to-br from-indigo-50 via-white to-rose-50 p-4 sm:p-6"
       >
-        <svg
-          class="pointer-events-none absolute -top-6 -left-6 h-28 w-28 text-indigo-300/60 sm:h-36 sm:w-36"
-          viewBox="0 0 100 100"
-          fill="none"
+        <span
+          class="icon-mask pointer-events-none absolute -top-6 -left-6 h-28 w-28 text-indigo-300/60 sm:h-36 sm:w-36 [--icon-url:url(/icons/diagonal-accent.svg)]"
           aria-hidden="true"
-        >
-          <path d="M0 30 L60 0" stroke="currentColor" stroke-width="1.5" />
-          <path d="M0 55 L85 20" stroke="currentColor" stroke-width="1.5" />
-        </svg>
+        ></span>
 
-        <svg
-          class="pointer-events-none absolute -right-6 -bottom-6 h-28 w-28 text-rose-300/60 sm:h-36 sm:w-36"
-          viewBox="0 0 100 100"
-          fill="none"
+        <span
+          class="icon-mask pointer-events-none absolute -right-6 -bottom-6 h-28 w-28 rotate-180 text-rose-300/60 sm:h-36 sm:w-36 [--icon-url:url(/icons/diagonal-accent.svg)]"
           aria-hidden="true"
-        >
-          <path d="M100 70 L40 100" stroke="currentColor" stroke-width="1.5" />
-          <path d="M100 45 L15 80" stroke="currentColor" stroke-width="1.5" />
-        </svg>
+        ></span>
 
         <div class="relative flex w-full max-w-sm flex-col gap-4 sm:max-w-md">
           <div class="flex items-center gap-2 px-1">

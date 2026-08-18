@@ -26,25 +26,15 @@ export class WelcomePage extends LitElement {
       <main
         class="relative flex min-h-svh items-center justify-center overflow-hidden bg-gradient-to-br from-indigo-50 via-white to-rose-50 p-4 sm:p-6"
       >
-        <svg
-          class="pointer-events-none absolute -top-6 -left-6 h-28 w-28 text-indigo-300/60 sm:h-36 sm:w-36"
-          viewBox="0 0 100 100"
-          fill="none"
+        <span
+          class="icon-mask pointer-events-none absolute -top-6 -left-6 h-28 w-28 text-indigo-300/60 sm:h-36 sm:w-36 [--icon-url:url(/icons/diagonal-accent.svg)]"
           aria-hidden="true"
-        >
-          <path d="M0 30 L60 0" stroke="currentColor" stroke-width="1.5" />
-          <path d="M0 55 L85 20" stroke="currentColor" stroke-width="1.5" />
-        </svg>
+        ></span>
 
-        <svg
-          class="pointer-events-none absolute -right-6 -bottom-6 h-28 w-28 text-rose-300/60 sm:h-36 sm:w-36"
-          viewBox="0 0 100 100"
-          fill="none"
+        <span
+          class="icon-mask pointer-events-none absolute -right-6 -bottom-6 h-28 w-28 rotate-180 text-rose-300/60 sm:h-36 sm:w-36 [--icon-url:url(/icons/diagonal-accent.svg)]"
           aria-hidden="true"
-        >
-          <path d="M100 70 L40 100" stroke="currentColor" stroke-width="1.5" />
-          <path d="M100 45 L15 80" stroke="currentColor" stroke-width="1.5" />
-        </svg>
+        ></span>
 
         <div class="relative flex w-full max-w-sm flex-col gap-6 sm:max-w-md">
           <div class="flex items-center gap-2 px-1">

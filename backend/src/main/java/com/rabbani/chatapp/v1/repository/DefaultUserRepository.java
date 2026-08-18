@@ -2,8 +2,9 @@ package com.rabbani.chatapp.v1.repository;
 
 import com.rabbani.chatapp.v1.entity.UserEntity;
 import com.rabbani.chatapp.v1.entity.query.UserAuthQuery;
-import com.rabbani.chatapp.v1.repository.delegator.UserRepositoryDelegator;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
@@ -36,8 +37,8 @@ public class DefaultUserRepository implements UserRepository {
     }
 
     @Override
-    public UserEntity save(UserEntity user) {
-        return userRepositoryDelegator.save(user);
+    public Page<UserEntity> searchContacts(BigInteger userId, String search, Pageable pageable) {
+        return userRepositoryDelegator.searchContacts(userId, search, pageable);
     }
 
 }

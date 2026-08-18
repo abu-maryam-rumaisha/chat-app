@@ -21,6 +21,8 @@ public class UserController {
 
     private Session.Validator meValidator;
 
+    private Session.Validator contactsValidator;
+
     public UserController(UserService userService, Session session) {
         this.userService = userService;
         this.session = session;
@@ -47,5 +49,19 @@ public class UserController {
     @PostMapping("/email-availability")
     public ResponseEntity<Response<UserControllerDto.EmailAvailabilityResponse>> checkEmailAvailability(@Valid @RequestBody UserControllerDto.EmailAvailabilityRequest requestPayload){
         return ResponseEntity.ok(userService.checkEmailAvailability(requestPayload));
+    }
+
+    @GetMapping("/contacts")
+    public ResponseEntity<Response<UserControllerDto.GetContactsResponse>> getContacts(
+            @RequestParam(name = "search", required = false) String search,
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "20") int size
+    ){
+        if(contactsValidator == null){
+            contactsValidator = session.auth();
+        }
+        contactsValidator.validate();
+
+        return ResponseEntity.ok(userService.getContacts(search, page, size));
     }
 }

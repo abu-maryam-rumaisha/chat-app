@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 import java.math.BigInteger;
+import java.util.List;
 
 public interface UserControllerDto {
 
@@ -53,6 +54,21 @@ public interface UserControllerDto {
     @Data
     class EmailAvailabilityResponse{
         private boolean available;
+    }
+
+    @Data
+    class GetContactsResponse{
+        private List<Contact> items;
+        private boolean hasMore;
+    }
+
+    @Data
+    class Contact{
+        private BigInteger id;
+        private String firstName;
+        private String lastName;
+        private String email;
+        private boolean online;
     }
 
 }

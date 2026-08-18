@@ -15,11 +15,11 @@ public class ConversationEntity extends AuditEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "signature")
+    private String signature;
+
     @Column(name = "group_id")
     private Long groupId;
-
-    @Column(name = "user_id")
-    private Long userId;
 
     @Column(name = "is_deleted")
     private boolean isDeleted;

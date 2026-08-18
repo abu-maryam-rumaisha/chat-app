@@ -14,6 +14,9 @@ importers:
       '@lit-labs/router':
         specifier: ^0.1.4
         version: 0.1.4
+      '@stomp/stompjs':
+        specifier: 7.3.0
+        version: 7.3.0
       '@tailwindcss/vite':
         specifier: ^4.3.3
         version: 4.3.3(vite@8.2.0(jiti@2.7.0))
@@ -202,6 +205,9 @@ packages:
 
   '@shoelace-style/localize@3.2.3':
     resolution: {integrity: sha512-pWoZywizMilenLfQcpE9bjaqi7WKiQXJB42cxvmSPwYS76U776wJ7B5QQ0P28yVit1vpHuFZzq1CtfVFv32jaQ==}
+
+  '@stomp/stompjs@7.3.0':
+    resolution: {integrity: sha512-nKMLoFfJhrQAqkvvKd1vLq/cVBGCMwPRCD0LqW7UT1fecRx9C3GoKEIR2CYwVuErGeZu8w0kFkl2rlhPlqHVgQ==}
 
   '@tailwindcss/node@4.3.3':
     resolution: {integrity: sha512-/T8IKEsf9VTU6tLjgC7+sv2mOPtQxzE2jMw7u4Tt40Tx+QSZxpzh95/H6cMKoja9XuW7iMdLJYBB0o9G1CaAgg==}
@@ -772,6 +778,8 @@ snapshots:
   '@shoelace-style/animations@1.2.0': {}
 
   '@shoelace-style/localize@3.2.3': {}
+
+  '@stomp/stompjs@7.3.0': {}
 
   '@tailwindcss/node@4.3.3':
     dependencies:

@@ -30,8 +30,15 @@ public class ApplicationProperties {
     @NotNull
     private Upload upload;
 
+    @Valid
+    @NotNull
+    private Websocket websocket;
+
     @Data
     public static class Session{
+
+        @NotNull
+        private String sameSite;
 
         @NotNull
         private Duration tokenTtl;
@@ -83,5 +90,21 @@ public class ApplicationProperties {
 
         @NotBlank
         private String iconsDir;
+    }
+
+    @Data
+    public static class Websocket{
+
+        @NotBlank
+        private String relayHost;
+
+        @NotNull
+        private Integer relayPort;
+
+        @NotBlank
+        private String login;
+
+        @NotBlank
+        private String passcode;
     }
 }

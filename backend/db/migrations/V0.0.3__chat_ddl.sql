@@ -2,14 +2,14 @@ create table conversations
 (
     id         bigserial primary key,
     group_id   bigint,
-    user_id    bigint,
+    signature  varchar(255) not null,
     is_deleted boolean      default false,
     created_at timestamp    default (now() at time zone 'utc'),
     created_by varchar(255) default 'system',
     updated_at timestamp,
     updated_by varchar(255),
     constraint fk_conversations_group_id foreign key (group_id) references groups (id),
-    constraint fk_conversations_user_id foreign key (user_id) references users (id)
+    constraint uq_conversations_signature unique (signature)
 );
 
 create table user_conversations

@@ -1,4 +1,4 @@
-import { API } from '../api/api.ts';
+import { API, apiFetch } from '../api/api.ts';
 
 const SESSION_COOKIE_NAME = 'chat-app.session';
 
@@ -34,7 +34,7 @@ interface SignInResponse {
 export class AccountPendingError extends Error {}
 
 export async function login(credentials: LoginCredentials): Promise<void> {
-  const response = await fetch(API.auth.signIn, {
+  const response = await apiFetch(API.auth.signIn, {
     method: 'POST',
     credentials: 'include',
     headers: {
@@ -82,7 +82,7 @@ export async function signup(profile: SignupProfile): Promise<void> {
     formData.set('icon', profile.icon);
   }
 
-  const response = await fetch(API.user.base, {
+  const response = await apiFetch(API.user.base, {
     method: 'POST',
     body: formData,
   });
@@ -103,7 +103,7 @@ interface EmailAvailabilityResponse {
 }
 
 export async function checkEmailAvailability(email: string): Promise<boolean> {
-  const response = await fetch(API.user.emailAvailability, {
+  const response = await apiFetch(API.user.emailAvailability, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email }),
@@ -130,7 +130,7 @@ interface GenerateOtpResponse {
 }
 
 export async function sendOtp(type: OtpType, recipient: string): Promise<void> {
-  const response = await fetch(API.auth.otp, {
+  const response = await apiFetch(API.auth.otp, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ type, recipient }),
@@ -148,7 +148,7 @@ interface VerifyOtpResponse {
 }
 
 export async function verifyOtp(type: OtpType, recipient: string, code: string): Promise<void> {
-  const response = await fetch(API.auth.otpVerification, {
+  const response = await apiFetch(API.auth.otpVerification, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ type, recipient, code }),
@@ -166,7 +166,7 @@ interface VerifyPasswordResetOtpResponse {
 }
 
 export async function verifyPasswordResetOtp(type: OtpType, recipient: string, code: string): Promise<string> {
-  const response = await fetch(API.auth.passwordResetOtpVerification, {
+  const response = await apiFetch(API.auth.passwordResetOtpVerification, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ type, recipient, code }),
@@ -182,7 +182,7 @@ export async function verifyPasswordResetOtp(type: OtpType, recipient: string, c
 }
 
 export async function resetPassword(resetToken: string, newPassword: string): Promise<void> {
-  const response = await fetch(API.auth.passwordReset, {
+  const response = await apiFetch(API.auth.passwordReset, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ resetToken, newPassword }),
@@ -197,7 +197,7 @@ export async function resetPassword(resetToken: string, newPassword: string): Pr
 
 export async function logout(): Promise<void> {
   try {
-    await fetch(API.auth.signOut, { method: 'POST', credentials: 'include' });
+    await apiFetch(API.auth.signOut, { method: 'POST', credentials: 'include' });
   } finally {
     clearSessionCookie();
   }

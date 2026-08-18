@@ -8,12 +8,14 @@ import com.rabbani.chatapp.v1.entity.UserEntity;
 import com.rabbani.chatapp.v1.entity.UserStatus;
 import com.rabbani.chatapp.v1.entity.query.UserAuthQuery;
 import com.rabbani.chatapp.v1.repository.UserRepository;
+import com.rabbani.chatapp.v1.repository.UserRepositoryWriter;
 import com.rabbani.chatapp.v1.service.AuthService;
 import com.rabbani.chatapp.v1.util.*;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.HttpHeaders;
@@ -31,6 +33,7 @@ import java.util.List;
 import java.util.random.RandomGenerator;
 import java.util.regex.Pattern;
 
+@Slf4j
 @Service
 @AllArgsConstructor
 public class BasicAuthService implements AuthService {
@@ -48,6 +51,8 @@ public class BasicAuthService implements AuthService {
     private final PasswordEncoder passwordEncoder;
 
     private final UserRepository userRepository;
+
+    private final UserRepositoryWriter userRepositoryWriter;
 
     private final RandomGenerator secureRandom;
 
@@ -137,7 +142,7 @@ public class BasicAuthService implements AuthService {
         sessionTokenCookie.setPath("/");
         sessionTokenCookie.setHttpOnly(true);
         sessionTokenCookie.setSecure(true);
-        sessionTokenCookie.setAttribute("SameSite", "Strict");
+        sessionTokenCookie.setAttribute("SameSite", applicationProperties.getSession().getSameSite());
         response.addCookie(sessionTokenCookie);
 
         Cookie refreshTokenCookie = new Cookie(Session.COOKIE_SESSION_REFRESH_TOKEN_NAME, refreshToken);
@@ -145,8 +150,9 @@ public class BasicAuthService implements AuthService {
         refreshTokenCookie.setPath("/");
         refreshTokenCookie.setHttpOnly(true);
         refreshTokenCookie.setSecure(true);
-        refreshTokenCookie.setAttribute("SameSite", "Strict");
+        refreshTokenCookie.setAttribute("SameSite", applicationProperties.getSession().getSameSite());
         response.addCookie(refreshTokenCookie);
+
         return new Response<>(responsePayload);
     }
 
@@ -287,7 +293,7 @@ public class BasicAuthService implements AuthService {
             UserEntity user = userRepository.findEntityByEmail(requestPayload.getRecipient())
                     .orElseThrow(() -> new ResponseException(HttpStatus.NOT_FOUND, "User does not exist"));
             user.setStatus(UserStatus.active);
-            userRepository.save(user);
+            userRepositoryWriter.save(user);
         }
 
         AuthControllerDto.VerifyOtpResponse response = new AuthControllerDto.VerifyOtpResponse();
@@ -340,7 +346,7 @@ public class BasicAuthService implements AuthService {
         UserEntity user = userRepository.findEntityByEmail(recipient)
                 .orElseThrow(() -> new ResponseException(HttpStatus.BAD_REQUEST, "Invalid or expired reset token"));
         user.setPassword(passwordEncoder.encode(requestPayload.getNewPassword()));
-        userRepository.save(user);
+        userRepositoryWriter.save(user);
 
         AuthControllerDto.ResetPasswordResponse response = new AuthControllerDto.ResetPasswordResponse();
         response.setReset(true);
@@ -381,6 +387,7 @@ public class BasicAuthService implements AuthService {
                     .retrieve()
                     .toBodilessEntity();
         } catch (RestClientException e) {
+            log.error("Failed to send OTP email",e);
             throw new ResponseException(HttpStatus.BAD_GATEWAY, "Failed to send OTP email");
         }
     }

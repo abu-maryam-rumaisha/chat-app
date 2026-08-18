@@ -8,7 +8,7 @@ create table if not exists "users"
     timezone   varchar(255),
     first_name varchar(100),
     last_name  varchar(100),
-    status     varchar(20) not null, -- active, inactive, pending
+    status     varchar(20)  not null, -- active, inactive, pending
     created_at timestamp default (now() at time zone 'utc'),
     created_by text      default 'system',
     updated_at timestamp,
